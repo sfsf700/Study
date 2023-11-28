@@ -7,12 +7,13 @@ public class CustomerEntity {
 
 	/** 顧客CD */
 	private String customerCd;
-	/** 顧客名 */
-	private String coustomerName;
+	/** 姓 */
+	private String sei;
+	/** 名 */
+	private String mei;
 	/** 顧客年齢 */
 	private int coustomerAge;
 	/** 購入回数 */
-	private Integer kounyuKaisu;
-	
+	private int kounyuKaisu;
 
 }

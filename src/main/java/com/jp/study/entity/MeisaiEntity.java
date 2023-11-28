@@ -12,8 +12,6 @@ public class MeisaiEntity {
 	private String shouhinCd;
 	/** 商品名 */
 	private String shouhinName;
-	/** 数量 */
-	private Integer suryo;
 	/** 税抜額 */
 	private Integer zeinukiGaku;
 	/** 税込額 */
