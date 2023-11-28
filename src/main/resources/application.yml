@@ -1,0 +1,10 @@
+spring:
+  sql:
+    init:
+      mode: always
+
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 
+    url: jdbc:mysql://localhost:3306/study
