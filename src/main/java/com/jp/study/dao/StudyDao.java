@@ -14,4 +14,6 @@ public interface StudyDao {
 	List<CustomerEntity> selectCustomer(@Param("customerCd") String customerCd);
 	
 	int deleteByPrimary(@Param("customerCd") String customerCd);
+	
+	int updateByPrimary(@Param("customerCd") String customerCd);
 }
