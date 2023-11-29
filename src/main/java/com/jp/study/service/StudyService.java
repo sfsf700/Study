@@ -25,6 +25,9 @@ public class StudyService {
 		return null;
 	}
 	
+	public void getNew() {
+		
+	}
 	public void show() {
 		
 	}
