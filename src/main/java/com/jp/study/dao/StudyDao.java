@@ -15,9 +15,9 @@ public interface StudyDao {
 	
 	int deleteByPrimary(@Param("customerCd") String customerCd);
 	
-
 	int selectByPrimary(@Param("customerCd") String customerCd);
 
 	int updateByPrimary(@Param("customerCd") String customerCd);
 
+	
 }
