@@ -24,4 +24,8 @@ public class StudyService {
 		
 		return null;
 	}
+	
+	public void getNew() {
+		
+	}
 }
