@@ -19,5 +19,5 @@ public interface StudyDao {
 
 	int updateByPrimary(@Param("customerCd") String customerCd);
 
-	
+
 }
