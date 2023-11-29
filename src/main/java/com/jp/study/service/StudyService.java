@@ -28,4 +28,7 @@ public class StudyService {
 	public void getNew() {
 		
 	}
+	public void show() {
+		
+	}
 }
