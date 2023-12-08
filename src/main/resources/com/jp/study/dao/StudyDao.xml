@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.study.dao.StudyDao">
+
+	<resultMap id="BaseMap" type="com.jp.study.entity.ShohinEntity">
+		<id column="SHOHIN_CD" property="shohinCd" />
+		<result column="SHOHIN_MEISHO" property="shohinMeisho" />
+		<result column="ZEINUKIGAKU" property="zeinukiGaku" />
+		<result column="ZEIGAKU" property="zeiGaku" />
+		<result column="ZEIKOMIGAKU" property="zeikomiGaku" />
+		<result column="DELETE_FLAG" property="deleteFlag" />
+		<result column="CREATE_DATE" property="createDate" />
+		<result column="UPDATE_DATE" property="updateDate" />
+	</resultMap>
+	
+	
+	<select id="findAllShohinList" parameterType="map" resultMap="BaseMap">
+		SELECT * FROM N_SHOHIN
+	</select>
+</mapper>

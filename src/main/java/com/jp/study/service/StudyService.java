@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.jp.study.dto.ShohinDto;
 import com.jp.study.entity.CustomerEntity;
 import com.jp.study.repository.StudyRepository;
 
@@ -24,11 +25,15 @@ public class StudyService {
 		
 		return null;
 	}
+
+	public List<ShohinDto> getShohinList() {
+		List<ShohinDto> shohinDto = studyRepository.selectAllShohinList();
+		
+		if(shohinDto.size() == 0) {
+			return null;
+		}
+		
+		return shohinDto;
+	}
 	
-	public void getNew() {
-		
-	}
-	public void show() {
-		
-	}
 }
