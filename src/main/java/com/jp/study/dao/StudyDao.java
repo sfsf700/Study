@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.jp.study.dto.ShohinDto;
 import com.jp.study.entity.CustomerEntity;
 
 @Mapper
@@ -18,6 +19,8 @@ public interface StudyDao {
 	int selectByPrimary(@Param("customerCd") String customerCd);
 
 	int updateByPrimary(@Param("customerCd") String customerCd);
+
+	List<ShohinDto> findAllShohinList();
 
 
 }
