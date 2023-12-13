@@ -7,5 +7,7 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
+	
+	
 
 </configuration>
