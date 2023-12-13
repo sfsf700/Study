@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.study.dao.CustomerDao">
+
+	<resultMap id="BaseMap" type="com.jp.study.entity.CustomerEntity">
+		<id column="CUSTOMER_CD" property="customerCd" />
+		<result column="SEI" property="sei" />
+		<result column="MEI" property="mei" />
+		<result column="YUBIN_NO" property="yubinNo" />
+		<result column="PREFECTURE_CITY" property="prefectureCity" />
+		<result column="STREET_NO" property="streetNo" />
+		<result column="KOUNYU_KAISU" property="kounyuKaisu" />
+		<result column="CREATE_DATE" property="createDate" />
+		<result column="UPDATE_DATE" property="updateDate" />
+		<result column="RUIKEI_KOUNYU_KINGAKU" property="ruikeiKonyuKingaku" />
+	</resultMap>
+	
+	<select id="findByCustomer" resultType="int">
+		SELECT COUNT(*)
+		FROM CUSTOMER
+		WHERE SEI = #{sei}
+		AND MEI = #{mei}
+	</select>
+	
+	<insert id="insertCustomer" parameterType="com.jp.study.entity.CustomerEntity">
+		INSERT INTO CUSTOMER
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		  <if test="customerCd != null">
+			CUSTOMER_CD, 
+		  </if>
+		  <if test="sei != null">
+            SEI,
+		 </if>
+		 <if test="mei != null">
+            MEI,
+         </if>
+         <if test="yubinNo != null">
+            YUBIN_NO,
+         </if>
+         <if test="prefectureCity != null">
+            PREFECTURE_CITY,
+          </if>
+          <if test="streetNo != null">
+            STREET_NO,
+          </if>
+          <if test="ruikeiKonyuKingaku != null">
+            RUIKEI_KOUNYU_KINGAKU,
+          </if>
+            KOUNYU_KAISU,
+            CREATE_DATE,
+            UPDATE_DATE
+		</trim>
+		VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="customerCd != null">
+            #{customerCd},
+          </if>
+          <if test="sei != null">
+            #{sei},
+          </if>
+          <if test="mei != null">
+            #{mei},
+          </if>
+          <if test="yubinNo != null">
+            #{yubinNo},
+         </if>
+         <if test="prefectureCity != null">
+            #{prefectureCity},
+          </if>
+          <if test="streetNo != null">
+            #{streetNo},
+          </if>
+          <if test="ruikeiKonyuKingaku != null">
+            #{ruikeiKonyuKingaku},
+         </if>
+            '1',
+            CURRENT_TIMESTAMP,
+            CURRENT_TIMESTAMP
+       </trim>
+	</insert>
+</mapper>

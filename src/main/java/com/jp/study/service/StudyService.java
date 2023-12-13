@@ -24,7 +24,6 @@ public class StudyService {
 		if(shohinList.size() == 0) {
 			return null;
 		}
-		
 		return shohinList;
 	}
 	
@@ -39,16 +38,28 @@ public class StudyService {
 		int zeinukiGaku = 0;
 		int zeiGaku = 0;
 		int zeikomiGaku = 0;
-		
+
 		for(ShohinDto shohinDto : denpyoDto.getShohinDto()) {
 			zeinukiGaku += shohinDto.getZeinukiGaku();
 			zeiGaku += shohinDto.getZeiGaku();
 			zeikomiGaku += shohinDto.getZeikomiGaku();
 		}
-		
-		studyRepository.registryDenpyo(zeinukiGaku, zeiGaku, zeikomiGaku, denpyoDto.getCustomerCd(), denpyoNo, denpyoDto.getKounyuDate());
-		
+
+		studyRepository.registryDenpyo(zeinukiGaku, zeiGaku, zeikomiGaku, denpyoDto.getCustomerCd(), denpyoNo, denpyoDto.getKounyuDate(), denpyoDto.getBiko());
 		
 	}
+	
+	public Long sumPrice(List<ShohinDto> shohinDto) {
+		
+		Long total = 0L;
+		
+		for(ShohinDto shohin : shohinDto) {
+			total += shohin.getZeinukiGaku();
+		}
+		
+		return total;
+	}
+	
+
 	
 }

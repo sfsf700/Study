@@ -9,7 +9,8 @@
 		<result column="ZEINUKIGAKU" property="zeinukiGaku" />
 		<result column="ZEIGAKU" property="zeiGaku" />
 		<result column="ZEIKOMIGAKU" property="zeikomiGaku" />
-		<result column="HAKKOZUMI_FLAG" property="hakkozumiFlag" />
+		<result column="DENPYO_HAKKOZUMI_FLAG" property="hakkozumiFlag" />
+		<result column="BIKO" property="biko" />
 		<result column="CREATE_DATE" property="createDate" />
 		<result column="UPDATE_DATE" property="updateDate" />
 	</resultMap>
@@ -29,7 +30,8 @@
 			, ZEINUKIGAKU
 			, ZEIGAKU
 			, ZEIKOMIGAKU
-			, HAKKOZUMI_FLAG
+			, DENPYO_HAKKOZUMI_FLAG
+			, BIKO
 			, CREATE_DATE
 			, UPDATE_DATE
 		) VALUES (
@@ -40,8 +42,34 @@
 			, #{zeiGaku}
 			, #{zeikomiGaku}
 			, '0'
+			, #{biko}
 			, CURRENT_TIMESTAMP
 			, CURRENT_TIMESTAMP
 		)
 	</insert>
+	
+<!-- 	<insert id="bulkInsert" parameterType="java.util.List">
+		INSERT INTO N_DENPYO (
+	    	DENPYO_NO,
+	        CUSTOMER_CD,
+	        KOUNYU_DATE,
+	        ZEINUKIGAKU,
+	        ZEIGAKU,
+	        ZEIKOMIGAKU,
+	        HAKKOZUMI_FLAG,
+	        CREATE_DATE,
+	        UPDATE_DATE
+	   ) VALUES
+	   <foreach collection="list" item="denpyoEntity" separator=",">
+	        (#{denpyoEntity.denpyoNo},
+	         #{denpyoEntity.customerCd},
+	         #{denpyoEntity.kounyuDate},
+	         #{denpyoEntity.zeinukiGaku},
+	         #{denpyoEntity.zeiGaku},
+	         #{denpyoEntity.zeikomiGaku},
+	         '0',
+	         CURRENT_TIMESTAMP,
+	         CURRENT_TIMESTAMp)
+	   </foreach>
+	</insert> -->
 </mapper>

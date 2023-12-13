@@ -14,17 +14,24 @@ public interface DenpyoDao {
 	 * @return 購入日ごとの伝票枚数
 	 */
 	int countDenpyoMaisu(@Param("kounyuDate") LocalDate kounyuDate);
-
+	
 	/**
-	 * 伝票の登録
+	 * 伝票登録
 	 * @param zeinukiGaku
 	 * @param zeiGaku
 	 * @param zeikomiGaku
 	 * @param customerCd
 	 * @param denpyoNo
+	 * @param kounyuDate
+	 * @param biko
 	 * @return
 	 */
-	int insertDenpyo(@Param("zeinukiGaku") int zeinukiGaku, @Param("zeiGaku") int zeiGaku, @Param("zeikomiGaku") int zeikomiGaku, 
-			@Param("customerCd") String customerCd, @Param("denpyoNo") String denpyoNo, @Param("kounyuDate") LocalDate kounyuDate);
+	int insertDenpyo(@Param("zeinukiGaku") int zeinukiGaku, 
+			@Param("zeiGaku") int zeiGaku, @Param("zeikomiGaku") int zeikomiGaku, 
+			@Param("customerCd") String customerCd, @Param("denpyoNo") String denpyoNo, 
+			@Param("kounyuDate") LocalDate kounyuDate, @Param("biko") String biko);
+
+	
+//	int bulkInsert(List<DenpyoEntity> denpyoList);
 
 }

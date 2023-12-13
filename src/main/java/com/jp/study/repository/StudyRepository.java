@@ -36,13 +36,18 @@ public class StudyRepository {
 		return denpyoDao.countDenpyoMaisu(kounyuDate);
 	}
 
-	public int registryDenpyo(int zeinukiGaku, int zeiGaku, int zeikomiGaku, String customerCd, String denpyoNo, LocalDate kounyuDate) {
+	public int registryDenpyo(int zeinukiGaku, int zeiGaku, int zeikomiGaku, String customerCd, String denpyoNo, LocalDate kounyuDate, String biko) {
 		try {
-			 return denpyoDao.insertDenpyo(zeinukiGaku, zeiGaku, zeikomiGaku, customerCd, denpyoNo, kounyuDate);
+			 return denpyoDao.insertDenpyo(zeinukiGaku, zeiGaku, zeikomiGaku, customerCd, denpyoNo, kounyuDate, biko);
 		} catch(Exception e) {
 			e.printStackTrace();
 			return 1;
 		}
 	}
+
+
+//	public void bulkInsert(List<DenpyoEntity> denpyoList) {
+//		denpyoDao.bulkInsert(denpyoList);
+//	}
 
 }

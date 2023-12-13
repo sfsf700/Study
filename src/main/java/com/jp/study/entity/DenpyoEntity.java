@@ -21,6 +21,8 @@ public class DenpyoEntity {
 	private Integer zeikomiGaku;
 	/** 伝票発行済みフラグ */
 	private String hakkozumiFlag;
+	/** 備考 */
+	private String biko;
 	/** 伝票作成日 */
 	private LocalDate createDate;
 	/** 伝票更新日 */

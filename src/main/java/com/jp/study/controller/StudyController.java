@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jp.study.dto.DenpyoDto;
 import com.jp.study.entity.ShohinEntity;
+import com.jp.study.service.CustomerService;
 import com.jp.study.service.StudyService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,8 @@ import lombok.RequiredArgsConstructor;
 public class StudyController {
 	
 	private final StudyService studyService;
+	
+	private final CustomerService customerService; 
 	
 	
 	@RequestMapping(value = "/home" , method = {RequestMethod.GET})
@@ -45,6 +48,11 @@ public class StudyController {
 	@RequestMapping(value = "/Save", method = {RequestMethod.POST})
 	public String saveDenpyo(@ModelAttribute DenpyoDto denpyoDto) {
 		
+		int result = customerService.findByCustomer(denpyoDto.getCustomerNameSei(), denpyoDto.getCustomerNameMei());
+		
+		if(result == 0) {
+			customerService.insertNewCustomer(denpyoDto);
+		}
 		
 		studyService.saveDenpyo(denpyoDto);
 		

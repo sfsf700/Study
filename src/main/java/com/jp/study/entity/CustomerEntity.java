@@ -13,8 +13,12 @@ public class CustomerEntity {
 	private String sei;
 	/** 名 */
 	private String mei;
-	/** 顧客年齢 */
-	private int coustomerAge;
+	/** 郵便番号 */
+	private String yubinNo;
+	/** 都道府県・市区町村 */
+	private String prefectureCity;
+	/** 番地・その他住所 */
+	private String streetNo;
 	/** 購入回数 */
 	private int kounyuKaisu;
 	/** 登録日 */
