@@ -1,11 +1,10 @@
 spring:
   datasource:
-    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/study
     username: root
-    password:
-    driverClassName: com.mysql.cj.jdbc.Driver
+    password: 
   sql:
     init:
       mode: always
-      
+
