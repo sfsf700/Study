@@ -18,20 +18,20 @@
         <main class="col-md-9 ml-sm-auto col-lg-10 bg-light">
           <div class="container r-w">
             <div class="d-flex justify-content-between align-items-center border-bottom border-dark mt-3">
-              <h1 class="h2">R-ネイル</h1>
-              <h6 class="">システム日付 : 2023/12/03 14:46</h6>
+              <h1 class="h1">R-ネイル</h1>
+              <h6 class="">システム日付 : <span id="clock"></span></h6>
             </div>
           </div>
           <form th:object="${denpyoDto}" th:action="@{/Save}" method="post">
             <div class="container">
               <div class="mt-3 mb-3">
-                <h2 class="h3">伝票登録</h2>
+                <h2 class="h2">伝票登録</h2>
               </div>
               <div id="formContainer">
                 <div class="mb-3 col-sm-2">
                   <div class="col">
                     <label for="formGroupExampleInput" class="form-label">登録日</label>
-                    <input type="Date" class="form-control" name=kounyuDate>
+                    <input type="Date" class="form-control" name=kounyuDate required="true">
                   </div>
                 </div>
                 
@@ -52,51 +52,52 @@
                 <div class="row g-3 mb-3">
                   <div class="col-sm-2">
                     <label for="formGroupExampleInput" class="form-label">お客様CD</label>
-                    <input type="text" class="form-control" th:field="*{customerCd}">
+                    <input type="text" class="form-control" th:field="*{customerCd}" required="true">
                   </div>
                   <div class="col-sm-3">
                     <label for="formGroupExampleInput" class="form-label">お客様 : 姓</label>
-                    <input type="text" class="form-control" th:field="*{customerNameSei}">
+                    <input type="text" class="form-control" th:field="*{customerNameSei}" required="true">
                   </div>
                   <div class="col-sm-3">
                     <label for="formGroupExampleInput" class="form-label">お客様 : 名</label>
-                    <input type="text" class="form-control" th:field="*{customerNameMei}">
+                    <input type="text" class="form-control" th:field="*{customerNameMei}" required="true">
                   </div>
                 </div>
                 <div id="dynamicElementContainer">
                   <div class="product-details-row">
-                    <div class="row g-3">
+                   <div class="mt-3" id="addMeisai">
+                    <div class="row g-3 mb-3">
                       <div class="col-sm-2">
                         <label for="formGroupExampleInput" class="form-label">商品CD</label>
-                        <select id="formGroupExampleInput" class="form-select">
+                        <select id="shohinCd_0" class="form-select" th:field="*{shohinDto[__${0}__].shohinCd}">
                           <option value="" selected>---</option>
                           <option th:each="shohinList : ${shohinList}" th:value="${shohinList.shohinCd}" th:text="${shohinList.shohinCd}"></option>
                         </select>
                       </div>
+                      <!--
                       <div class="col">
                         <label for="formGroupExampleInput" class="form-label">商品名</label>
-                        <input type="text" th:field="*{shohinDto[__${0}__].shohinMeisho}" class="form-control">
+                        <input type="text" id="shohinMeisho_0" th:field="*{shohinDto[__${0}__].shohinMeisho}" class="form-control" required="true">
                       </div>
+                      -->
                       <div class="col">
                         <label for="formGroupExampleInput" class="form-label">税抜額</label>
-                        <input type="text" th:field="*{shohinDto[__${0}__].zeinukiGaku}" class="form-control">
+                        <input type="text" id="zeinukiGaku_0" th:field="*{shohinDto[__${0}__].zeinukiGaku}" class="form-control" required="true">
                       </div>
                       <div class="col">
                         <label for="formGroupExampleInput" class="form-label">税額</label>
-                        <input type="text" th:field="*{shohinDto[__${0}__].zeiGaku}" class="form-control">
+                        <input type="text" id="zeiGaku_0" th:field="*{shohinDto[__${0}__].zeiGaku}" class="form-control" required="true">
                       </div>
                       <div class="col">
                         <label for="formGroupExampleInput" class="form-label">税込額</label>
-                        <input type="text" th:field="*{shohinDto[__${0}__].zeikomiGaku}" class="form-control">
+                        <input type="text" id="zeikomiGaku_0" th:field="*{shohinDto[__${0}__].zeikomiGaku}" class="form-control" required="true">
                       </div>
+                    </div>
                     </div>
                     <div class="mt-3" id="addMeisai"></div>
                     <div class="d-flex mt-3 mb-3">
                       <div class="col align-items-center">
-                        <span class="align-items-center" id="addForm">商品追加</span>
-                      </div>
-                      <div class="col d-flex justify-content-end align-items-center">
-                        合計金額 : 円
+                        <span class="align-items-center btn btn-primary" id="addForm">商品追加</span>
                       </div>
                     </div>
                     <div class="mb-3">
@@ -108,8 +109,8 @@
                   <label for="formGroupExampleInput" class="form-label">備考</label>
                   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{biko}"></textarea>
                 </div>
-                <div class="col">
-					<button type="submit">登録</button>
+                <div class="col mb-3">
+					<button type="submit" class="btn btn-primary btn-lg">登録</button>
 				</div>
               </div>
             </div>
@@ -127,10 +128,9 @@
           var index = 0;
           
           $('#addForm').on('click', function () {
-      			  index++;
-
+      	      index++;
               var newForm = $(`
-                  <div class="row g-3">
+                  <div class="row g-3 mb-3">
                       <div class="col-sm-2">
                           <label for="formGroupExampleInput" class="form-label">商品CD</label>
                           <select class="form-select" id="shohinCd_${index}" name="shohinDto[${index}].shohinCd">
@@ -138,20 +138,16 @@
                           </select>
                       </div>
                       <div class="col">
-                          <label for="formGroupExampleInput" class="form-label">商品名</label>
-                          <input type="text" id="shohinMeisho_${index}" class="form-control" name="shohinDto[${index}].shohinMeisho">
-                      </div>
-                      <div class="col">
                           <label for="formGroupExampleInput" class="form-label">税抜額</label>
-                          <input type="text" id="zeinukiGaku_${index}" class="form-control" name="shohinDto[${index}].zeinukiGaku">
+                          <input type="text" id="zeinukiGaku_${index}" class="form-control" name="shohinDto[${index}].zeinukiGaku" value="0">
                       </div>
                       <div class="col">
                           <label for="formGroupExampleInput" class="form-label">税額</label>
-                          <input type="text" id="zeiGaku_${index}" class="form-control" name="shohinDto[${index}].zeiGaku">
+                          <input type="text" id="zeiGaku_${index}" class="form-control" name="shohinDto[${index}].zeiGaku" value="0">
                       </div>
                       <div class="col">
                           <label for="formGroupExampleInput" class="form-label">税込額</label>
-                          <input type="text" id="zeikomiGaku_${index}" class="form-control" name="shohinDto[${index}].zeikomiGaku">
+                          <input type="text" id="zeikomiGaku_${index}" class="form-control" name="shohinDto[${index}].zeikomiGaku" value="0">
                       </div>
                   </div>
               `);
@@ -163,7 +159,60 @@
                 }));
               });
           });
+          
+         $('#addMeisai').on('change', 'select[id^="shohinCd_"]', function () {
+   			var selectedIndex = $(this).attr('id').match(/\d+/)[0];
+			var selectedShohinCd = $(this).val();
+
+			// Ajaxリクエストを使用して対応する情報をサーバーから取得
+			$.ajax({
+            	url: '/getShohinInfo',  // サーバーのエンドポイントを指定
+				type: 'GET',
+				data: { shohinCd: selectedShohinCd },
+				success: function (data) {
+					$(`#zeinukiGaku_${selectedIndex}`).val(data.zeinukiGaku || 0);
+					$(`#zeiGaku_${selectedIndex}`).val(data.zeiGaku || 0);
+					$(`#zeikomiGaku_${selectedIndex}`).val(data.zeikomiGaku || 0);
+				},
+				error: function () {
+                	console.log('エラーが発生しました');
+				}
+			});
+		});
+
+	    $('#addMeisai').on('input', 'input[id^="zeinukiGaku_"]', function () {
+	        var selectedIndex = $(this).attr('id').match(/\d+/)[0];
+			if($(this).val().trim() === '' ){
+				 $(this).val(0);
+			}
+	    });
+	    
+	    $('#addMeisai').on('input', 'input[id^="zeiGaku_"]', function () {
+	        var selectedIndex = $(this).attr('id').match(/\d+/)[0];
+			if($(this).val().trim() === '' ){
+				 $(this).val(0);
+			}
+	    });
+	    
+	    $('#addMeisai').on('input', 'input[id^="zeikomiGaku_"]', function () {
+	        var selectedIndex = $(this).attr('id').match(/\d+/)[0];
+			if($(this).val().trim() === '' ){
+				 $(this).val(0);
+			}
+	    });
+	    
       });
+	  function updateClock() {
+	      var now = new Date();
+	      var formattedTime = now.toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+	      document.getElementById('clock').innerText = formattedTime;
+	  }
+	
+	  // 初回実行
+	  updateClock();
+	
+	  // 1秒ごとに時計を更新
+	  setInterval(updateClock, 1000);
   </script>
   
   </body>

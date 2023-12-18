@@ -14,6 +14,7 @@ import org.springframework.core.io.support.ResourcePatternUtils;
 @Configuration
 @MapperScan("com.jp.study.dao")
 public class DaoConfig {
+	
 
     @Bean
     public SqlSessionFactory sqlSessionFactoryBean(DataSource dataSource) throws Exception {

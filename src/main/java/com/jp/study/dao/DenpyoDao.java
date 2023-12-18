@@ -1,9 +1,12 @@
 package com.jp.study.dao;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import com.jp.study.entity.DenpyoEntity;
 
 @Mapper
 public interface DenpyoDao {
@@ -31,7 +34,6 @@ public interface DenpyoDao {
 			@Param("customerCd") String customerCd, @Param("denpyoNo") String denpyoNo, 
 			@Param("kounyuDate") LocalDate kounyuDate, @Param("biko") String biko);
 
-	
-//	int bulkInsert(List<DenpyoEntity> denpyoList);
+	List<DenpyoEntity> selectAllDenpyoLust();
 
 }

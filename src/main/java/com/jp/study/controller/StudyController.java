@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jp.study.dto.DenpyoDto;
+import com.jp.study.dto.ShohinDto;
+import com.jp.study.entity.DenpyoEntity;
 import com.jp.study.entity.ShohinEntity;
 import com.jp.study.service.CustomerService;
 import com.jp.study.service.StudyService;
@@ -26,7 +28,15 @@ public class StudyController {
 	
 	
 	@RequestMapping(value = "/home" , method = {RequestMethod.GET})
-	public String show() {
+	public String show(Model model) {
+		
+		List<DenpyoEntity> denpyoList = studyService.selectAllDenpyoList();
+//		LocalDateTime nowDateTime = LocalDateTime.now();
+//		String nowTimeString = nowDateTime.toString().substring(0, 19).replace("T", " ");
+//	
+//		model.addAttribute("now", nowTimeString);
+		model.addAttribute("denpyoList", denpyoList);
+		
 		return "study/Study";
 	}
 	
@@ -38,11 +48,10 @@ public class StudyController {
 		
 		DenpyoDto denpyoDto = new DenpyoDto();
 		
-		
 		model.addAttribute("shohinList", shohinList);
 		model.addAttribute("denpyoDto", denpyoDto);
 		
-		return "/study/New";
+		return "study/New";
 	}
 	
 	@RequestMapping(value = "/Save", method = {RequestMethod.POST})
@@ -55,9 +64,23 @@ public class StudyController {
 		}
 		
 		studyService.saveDenpyo(denpyoDto);
-		
-		
 		 
-		return "study/Study";
+		return "redirect:home";
+	}
+	
+	@RequestMapping(value = "/ItemNew", method = {RequestMethod.GET})
+	public String newItem(Model model) {
+		
+		model.addAttribute("shohin", new ShohinDto());	
+		
+		return "study/ItemNew";
+	}
+
+	@RequestMapping(value = "/ItemSave", method = {RequestMethod.POST})
+	public String saveItem(@ModelAttribute ShohinDto shohinDto){
+		
+		studyService.registryNewItem(shohinDto);
+		
+		return "redirect:home";
 	}
 }

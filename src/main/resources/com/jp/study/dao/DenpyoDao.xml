@@ -15,6 +15,10 @@
 		<result column="UPDATE_DATE" property="updateDate" />
 	</resultMap>
 	
+	<select id="selectAllDenpyoLust" resultMap="BaseMap">
+		SELECT * FROM N_DENPYO 
+	</select>
+	
 	
 	<select id="countDenpyoMaisu" resultType="int">
 		SELECT COUNT(*) 
