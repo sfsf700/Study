@@ -8,3 +8,10 @@ spring:
     init:
       mode: always
 
+
+# 特定のパッケージのログレベルをDEBUGに設定
+logging:
+  level:
+    com:
+      jp:
+        study: DEBUG

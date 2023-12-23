@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.jp.study.dto.SearchItemDto;
 import com.jp.study.entity.ShohinEntity;
 
 @Mapper
@@ -16,7 +17,7 @@ public interface StudyDao {
 	 */
 	List<ShohinEntity> findAllShohinList();
 
-	ShohinEntity  selectByPrimaryShohin(@Param("shohinCd") String shohinCd);
+	ShohinEntity  selectByShohinKingaku(@Param("shohinCd") String shohinCd);
 
 	/**
 	 * 登録されている商品数量
@@ -25,4 +26,12 @@ public interface StudyDao {
 	String selectByLastShohinCd(@Param("color") String color);
 	
 	void insertShohin(ShohinEntity shohinEntity);
+	
+	ShohinEntity findByShohin(@Param("shohinCd") String shohinCd);
+	
+	int delete(@Param("shohinCd")String shohinCd);
+	
+	int updateByPrimary(ShohinEntity shohinEntity);
+	
+	List<ShohinEntity> searchItemList(SearchItemDto searchItemDto);
 }

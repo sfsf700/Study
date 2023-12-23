@@ -26,13 +26,14 @@ public class ShohinController {
 			return ResponseEntity.ok(null);
 		}
 		
-		ShohinDto shohinDto = studyService.getShohinInfo(shohinCd);
+		ShohinDto shohinDto = studyService.getShohinKingaku(shohinCd);
 		
 		
 		return new ResponseEntity<ShohinDto>(shohinDto, HttpStatus.OK);
 		
 	}
 	
-
+	
+	
  
 }

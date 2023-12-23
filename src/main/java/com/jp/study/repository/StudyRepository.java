@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jp.study.dao.DenpyoDao;
 import com.jp.study.dao.MeisaiDao;
 import com.jp.study.dao.StudyDao;
+import com.jp.study.dto.SearchItemDto;
 import com.jp.study.dto.ShohinDto;
 import com.jp.study.entity.DenpyoEntity;
 import com.jp.study.entity.SalesEntity;
@@ -61,8 +62,8 @@ public class StudyRepository {
 	 * @param shohinCd
 	 * @return ShohinDto
 	 */
-	public ShohinDto selectByPrimaryShohin(String shohinCd) {
-		ShohinEntity entity = studyDao.selectByPrimaryShohin(shohinCd);
+	public ShohinDto selectByShohinKingaku(String shohinCd) {
+		ShohinEntity entity = studyDao.selectByShohinKingaku(shohinCd);
 		ShohinDto dto = new ShohinDto();
 		dto.setZeinukiGaku(entity.getZeinukiGaku());
 		dto.setZeiGaku(entity.getZeiGaku());
@@ -95,6 +96,23 @@ public class StudyRepository {
 	
 	public void insertNewItem(ShohinEntity shohinEntity) {
 		studyDao.insertShohin(shohinEntity);
+	}
+	
+	public ShohinEntity findByShohin(String shohinCd) {
+		return studyDao.findByShohin(shohinCd);
+	}
+	
+	public int deleteItem(String shohinCd) {
+		return studyDao.delete(shohinCd);
+	}
+	
+	public int updateItem(ShohinEntity shohinEntity) {
+		return studyDao.updateByPrimary(shohinEntity);
+	}
+	
+	public List<ShohinEntity> searchItem(SearchItemDto searchItemDto) {
+		return studyDao.searchItemList(searchItemDto);
+		
 	}
 
 //	public void bulkInsert(List<DenpyoEntity> denpyoList) {

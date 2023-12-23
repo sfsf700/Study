@@ -18,10 +18,16 @@
 	
 	
 	<select id="findAllShohinList" parameterType="map" resultMap="BaseMap">
-		SELECT * FROM N_SHOHIN
+		SELECT * 
+		FROM 
+			N_SHOHIN 
+		WHERE 
+			DELETE_FLAG = '0'
+		ORDER BY
+			UPDATE_DATE DESC
 	</select>
 	
-	<select id="selectByPrimaryShohin">
+	<select id="selectByShohinKingaku">
 		SELECT
 			ZEINUKIGAKU,
 			ZEIGAKU,
@@ -30,6 +36,14 @@
 			N_SHOHIN
 		WHERE
 			SHOHIN_CD = #{shohinCd}
+		AND DELETE_FLAG = '0'
+	</select>
+
+	<select id="findByShohin">
+		SELECT *
+		FROM
+			N_SHOHIN
+		WHERE SHOHIN_CD = #{shohinCd}
 		AND DELETE_FLAG = '0'
 	</select>
 	
@@ -42,6 +56,8 @@
 		ORDER BY SHOHIN_CD DESC
 		LIMIT 1
 	</select>
+	
+	
 	
 	<insert id="insertShohin">
 		INSERT INTO N_SHOHIN
@@ -105,5 +121,59 @@
             CURRENT_TIMESTAMP
 		</trim>
 	</insert>
+	
+	<update id="delete">
+		UPDATE N_SHOHIN
+		SET
+			DELETE_FLAG = '1'	
+		WHERE 
+			SHOHIN_CD = #{shohinCd}
+		AND DELETE_FLAG = '0'
+	</update>
+	
+	<update id="updateByPrimary">
+		UPDATE N_SHOHIN
+		SET
+		<trim suffixOverrides=",">
+			<if test="zeinukiGaku != null">
+				ZEINUKIGAKU = #{zeinukiGaku},
+			</if>
+			<if test="zeiGaku != null">
+				ZEIGAKU = #{zeiGaku},
+			</if> 
+			<if test="zeikomiGaku != null">
+				ZEIKOMIGAKU = #{zeikomiGaku},
+			</if>
+			<if test="makeTime != null">
+				MAKE_TIME = #{makeTime},
+			</if>
+			<if test="zairyoMemo != null">
+				ZAIRYO_MEMO = #{zairyoMemo},
+			</if>
+			<if test="shohinMemo != null">
+				SHOHIN_MEMO = #{shohinMemo},
+			</if>
+		</trim>
+		,
+		UPDATE_DATE = CURRENT_TIMESTAMP
+		WHERE
+			SHOHIN_CD = #{shohinCd}
+		AND DELETE_FLAG = '0'
+	</update>
+	
+	<select id="searchItemList" resultMap="BaseMap">
+		SELECT *
+		FROM 
+			N_SHOHIN
+		WHERE 
+			DELETE_FLAG = '0'
+		<if test="shohinCd != null">
+			AND SHOHIN_CD = #{shohinCd}
+		</if>
+	    <if test="color != null">
+	        AND COLOR = #{color}
+	    </if>
+	  
+	</select>
 
 </mapper>

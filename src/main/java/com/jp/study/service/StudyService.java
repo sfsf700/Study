@@ -9,11 +9,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.jp.study.dto.DenpyoDto;
+import com.jp.study.dto.SearchItemDto;
 import com.jp.study.dto.ShohinDto;
 import com.jp.study.entity.DenpyoEntity;
 import com.jp.study.entity.SalesEntity;
 import com.jp.study.entity.ShohinEntity;
 import com.jp.study.repository.StudyRepository;
+import com.jp.study.response.ResponseData;
 import com.jp.study.util.Constants;
 
 import lombok.RequiredArgsConstructor;
@@ -33,9 +35,9 @@ public class StudyService {
 		return shohinList;
 	}
 	
-	public ShohinDto getShohinInfo(String shohinCd) {
+	public ShohinDto getShohinKingaku(String shohinCd) {
 		
-		ShohinDto dto = studyRepository.selectByPrimaryShohin(shohinCd);
+		ShohinDto dto = studyRepository.selectByShohinKingaku(shohinCd);
 		
 		if(ObjectUtils.isNotEmpty(dto)) {
 			return dto;
@@ -43,6 +45,9 @@ public class StudyService {
 		return null;
 	}
 	
+	public ShohinEntity getShohinInfo(String shohinCd) {
+		return studyRepository.findByShohin(shohinCd);
+	}
 	
 	public void saveDenpyo(DenpyoDto denpyoDto) {
 		
@@ -97,7 +102,7 @@ public class StudyService {
 		return total;
 	}
 	
-	public void registryNewItem(ShohinDto shohinDto) {
+	public String registryNewItem(ShohinDto shohinDto) {
 		// 商品コードの番号生成
 		int lastShohinCd = studyRepository.findByLastShohinCd(jpColorHenkan(shohinDto.getColor()));
 		String shohinNo = String.format("%03d", lastShohinCd + 1);
@@ -119,6 +124,8 @@ public class StudyService {
 		entity.setZairyoMemo(StringUtils.isEmpty(shohinDto.getZairyoMemo()) ? null : shohinDto.getZairyoMemo());
 		entity.setShohinMemo(StringUtils.isEmpty(shohinDto.getShohinMemo()) ? null : shohinDto.getShohinMemo());
 		studyRepository.insertNewItem(entity);
+		
+		return  shohinDto.getColor() + shohinNo;
 		
 	}
 	
@@ -176,4 +183,35 @@ public class StudyService {
 		return jpColor;
 	}
 	
+	public int deleteItem(String shohinCd) {
+		return studyRepository.deleteItem(shohinCd);
+	}
+	
+	public int updateItem(ShohinEntity shohinEntity) {
+		
+		int zeinukiGaku = shohinEntity.getZeinukiGaku();
+		int zeiGaku = calcZeigaku(zeinukiGaku);
+		shohinEntity.setZeiGaku(zeiGaku);
+		shohinEntity.setZeikomiGaku(zeiGaku + zeinukiGaku);
+		return studyRepository.updateItem(shohinEntity);
+	}
+	
+	public ResponseData<SearchItemDto> searchItemDataList(SearchItemDto searchItemDto) {
+		ResponseData<SearchItemDto> res = new ResponseData<SearchItemDto>();
+		
+		if(StringUtils.equals(searchItemDto.getColor(), "0")) {
+			searchItemDto.setColor(null);
+		}
+
+		if(StringUtils.equals(searchItemDto.getShohinCd(), "0")) {
+			searchItemDto.setShohinCd(null);
+		}
+		
+		res.setData(searchItemDto);
+		return res;
+	}
+
+	public List<ShohinEntity> getSearchItemList(SearchItemDto searchItemDto) {
+		return studyRepository.searchItem(searchItemDto);
+	}
 }
