@@ -1,7 +1,10 @@
 package com.jp.study.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils;
@@ -9,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.jp.study.dto.DenpyoDto;
+import com.jp.study.dto.ExportDenpyoPdf;
+import com.jp.study.dto.PrintPDF;
 import com.jp.study.dto.SearchItemDto;
 import com.jp.study.dto.ShohinDto;
 import com.jp.study.entity.DenpyoEntity;
@@ -19,6 +24,12 @@ import com.jp.study.response.ResponseData;
 import com.jp.study.util.Constants;
 
 import lombok.RequiredArgsConstructor;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Service
 @RequiredArgsConstructor
@@ -214,4 +225,48 @@ public class StudyService {
 	public List<ShohinEntity> getSearchItemList(SearchItemDto searchItemDto) {
 		return studyRepository.searchItem(searchItemDto);
 	}
+	
+	
+	public List<ExportDenpyoPdf> exportDenpyoPdfs(String denpyoNo) throws JRException, IOException{
+	
+		
+		String jasperFilePath =  getClass().getResource("/jasper-template.jasper").getPath();
+		
+		List<ExportDenpyoPdf> pdfsList = studyRepository.exportDenpyo(denpyoNo);
+		String customerName = pdfsList.get(0).getSei() + pdfsList.get(0).getMei();
+		
+		Integer goukeiKingaku = 0;
+		List<PrintPDF> printList = new ArrayList<>();
+		for(int i = 0; i < pdfsList.size(); i++) {
+			PrintPDF pdf = new PrintPDF();
+			goukeiKingaku += pdfsList.get(i).getZeikomiGaku();
+			pdf.setNumber(i+1);
+			pdf.setColor(pdfsList.get(i).getColor());
+			pdf.setShohinCd(pdfsList.get(i).getShohinCd());
+			pdf.setZeikomiGaku(pdfsList.get(i).getZeikomiGaku());
+			printList.add(pdf);
+			
+		}
+		
+		String exportBasePath = "/Users/okuhirokazu/" + denpyoNo + "/";
+		String fileName = denpyoNo + ".pdf";
+		File directory = new File(exportBasePath);
+		if (!directory.exists()) {
+		    directory.mkdirs();
+		}
+		
+		JRDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(printList);
+		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("customerName", customerName);
+		parameterMap.put("goukeiKingaku", goukeiKingaku.toString());
+		
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperFilePath, parameterMap, jrBeanCollectionDataSource);
+		JasperExportManager.exportReportToPdfFile(jasperPrint, exportBasePath + fileName);
+		
+	
+		return null;
+		
+	}
+	
+	
 }

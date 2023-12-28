@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2e65afac-790c-4c32-8125-e96d7b155ddf">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<subDataset name="Empty Dataset1" uuid="103925cd-3ef0-4f4a-a650-e7147eb1bc24"/>
+	<parameter name="customerName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{customerName}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="goukeiKingaku" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{goukeiKingaku}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="color" class="java.lang.String"/>
+	<field name="shohinCd" class="java.lang.String"/>
+	<field name="suryo" class="java.lang.Integer"/>
+	<field name="zeikomiGaku" class="java.lang.Integer"/>
+	<field name="number" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="135" splitType="Stretch">
+			<staticText>
+				<reportElement x="30" y="35" width="490" height="30" uuid="113be953-649a-4a60-b3e8-880b7d06deaa"/>
+				<box>
+					<bottomPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAex明朝" size="20"/>
+				</textElement>
+				<text><![CDATA[領収書]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="90" width="70" height="28" uuid="867650d8-43d3-41c3-9e76-2f05c81dc6b7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="IPAex明朝" size="10"/>
+				</textElement>
+				<text><![CDATA[発行日 : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="90" width="348" height="28" uuid="d76f4ea3-51d5-44cc-937f-4f66550880e6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="IPAex明朝"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="68" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="450" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="75" width="70" height="30" uuid="263a4741-10d5-479f-b386-eeede548d932"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAex明朝" size="20"/>
+				</textElement>
+				<text><![CDATA[¥]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="80" y="148" width="441" height="32" uuid="ea043534-6455-48ee-b628-1bbbe10f0513"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="80" y="180" width="441" height="32" uuid="3712aae6-6199-4090-83aa-d733214acbc0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="80" y="148" width="30" height="64" uuid="fc9fd643-4978-4460-9a31-5a10fe2a5d4a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="400" y="148" width="40" height="64" uuid="7f259dc6-c7bf-4824-b42b-011f38896668"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="180" y="148" width="220" height="64" uuid="2de217e8-ec1a-4808-b12a-770043300062"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="110" y="148" width="70" height="32" uuid="3e87221f-335f-486c-a153-041099804c89"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAex明朝"/>
+				</textElement>
+				<text><![CDATA[カラー]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="148" width="30" height="32" uuid="f6d95362-f2ae-49a8-84af-039d0da3f2f3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAex明朝"/>
+				</textElement>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="148" width="220" height="32" uuid="8054b454-257c-4ce7-9c78-e99c9b181e99"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAex明朝"/>
+				</textElement>
+				<text><![CDATA[商品コード]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="148" width="40" height="32" uuid="f667b511-128a-4322-9143-1bcbdd52f1a2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAex明朝"/>
+				</textElement>
+				<text><![CDATA[数量]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="148" width="80" height="32" uuid="ff6da2f1-43e0-4a9c-8879-f88ee2bea60c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAex明朝"/>
+				</textElement>
+				<text><![CDATA[単価(税込)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="181" width="220" height="30" uuid="59bac376-7714-4816-9de8-e951155308c9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAex明朝"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{shohinCd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="399" y="180" width="42" height="31" uuid="ad889d46-6f63-4e64-b14e-98d6f74d2221"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAex明朝"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{suryo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="441" y="181" width="80" height="31" uuid="1f60cf39-8023-40da-9dd5-dfef732c7d3e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAex明朝"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{zeikomiGaku}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="181" width="70" height="31" uuid="52b64c6a-693e-4170-aea3-c716e60a3e96"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAex明朝"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{color}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="181" width="30" height="31" uuid="663f8b63-fe7a-40e6-ab14-0b299383b2d3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAex明朝"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{number}]]></textFieldExpression>
+			</textField>
+			<ellipse>
+				<reportElement mode="Opaque" x="47" y="376" width="66" height="66" forecolor="#CF8584" backcolor="#CF8584" uuid="db94329d-6fea-49c6-8ebe-0af4f5c79965">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="80" y="374" width="440" height="70" uuid="e13925f1-710d-4d50-b202-0edc1ad85de7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="IPAex明朝"/>
+				</textElement>
+				<text><![CDATA[この度はご購入頂きまして有難うございます。
+またのご利用をお待ちしております。
+お届けさせて頂きました商品について、ご不明な点がありましたら
+下記までご連絡ください。]]></text>
+			</staticText>
+			<textField hyperlinkType="">
+				<reportElement x="80" y="0" width="440" height="30" uuid="2292d41c-cd0c-4d9e-9126-781aa3c71d46"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAex明朝" size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{customerName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="75" width="440" height="30" uuid="9a556088-073a-4630-83ed-635c1ad3db5e"/>
+				<box>
+					<bottomPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAex明朝" size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{goukeiKingaku}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="450" y="2" width="70" height="28" uuid="1412debe-1613-4c4a-b7cd-d9d68b7ec2fb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAex明朝" size="14"/>
+				</textElement>
+				<text><![CDATA[様]]></text>
+			</staticText>
+		</band>
+		<band height="50"/>
+	</detail>
+	<columnFooter>
+		<band height="29"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="70" splitType="Stretch">
+			<ellipse>
+				<reportElement mode="Opaque" x="47" y="-14" width="66" height="66" forecolor="#CF8584" backcolor="#CF8584" uuid="74cd9a29-c9d0-4b3b-8a10-43aba8d08e6e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="80" y="0" width="441" height="39" uuid="b577e806-b6d2-413f-8db5-4f76f770c37c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="IPAex明朝"/>
+				</textElement>
+				<text><![CDATA[☆インスタ　R.nail(@r_nail_7)
+https://www.instagram.com/r_nail_7/]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

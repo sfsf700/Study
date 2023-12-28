@@ -52,6 +52,44 @@
 		)
 	</insert>
 	
+	<resultMap id="ExportDenpyo" type="com.jp.study.dto.ExportDenpyoPdf">
+	  <result column="KOUNYU_DATE" property="kounyuDate" />
+	  <result column="SEI" property="sei" />
+	  <result column="MEI" property="mei" />
+	  <result column="SHOHIN_CD" property="shohinCd" />
+	  <result column="COLOR" property="color" />
+	  <result column="ZEIKOMIGAKU" property="zeikomiGaku" />
+	</resultMap>
+	
+	<select id="exportDenpyo" resultMap="ExportDenpyo">
+		SELECT 
+			N.KOUNYU_DATE,
+			C.SEI,
+			C.MEI,
+			SH.SHOHIN_CD,
+			SH.COLOR,
+			SH.ZEIKOMIGAKU
+		FROM 
+			N_DENPYO N
+		INNER JOIN 
+			N_SALES NS
+		ON 
+			N.DENPYO_NO = NS.DENPYO_NO
+		INNER JOIN 
+			CUSTOMER C
+		ON 
+			C.CUSTOMER_CD = N.CUSTOMER_CD
+		INNER JOIN 
+			N_SHOHIN SH
+		ON 
+			SH.SHOHIN_CD = NS.SHOHIN_CD
+		WHERE 
+			N.DENPYO_NO = #{denpyoNo}
+		AND 
+			N.DENPYO_HAKKOZUMI_FLAG = '0'
+	
+	</select>
+	
 <!-- 	<insert id="bulkInsert" parameterType="java.util.List">
 		INSERT INTO N_DENPYO (
 	    	DENPYO_NO,

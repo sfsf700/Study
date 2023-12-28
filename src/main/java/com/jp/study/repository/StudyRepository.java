@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jp.study.dao.DenpyoDao;
 import com.jp.study.dao.MeisaiDao;
 import com.jp.study.dao.StudyDao;
+import com.jp.study.dto.ExportDenpyoPdf;
 import com.jp.study.dto.SearchItemDto;
 import com.jp.study.dto.ShohinDto;
 import com.jp.study.entity.DenpyoEntity;
@@ -113,6 +114,10 @@ public class StudyRepository {
 	public List<ShohinEntity> searchItem(SearchItemDto searchItemDto) {
 		return studyDao.searchItemList(searchItemDto);
 		
+	}
+	
+	public List<ExportDenpyoPdf> exportDenpyo(String denpyo){
+		return denpyoDao.exportDenpyo(denpyo);
 	}
 
 //	public void bulkInsert(List<DenpyoEntity> denpyoList) {

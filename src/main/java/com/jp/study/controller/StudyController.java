@@ -1,5 +1,6 @@
 package com.jp.study.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import com.jp.study.service.CustomerService;
 import com.jp.study.service.StudyService;
 
 import lombok.RequiredArgsConstructor;
+import net.sf.jasperreports.engine.JRException;
 
 
 @Controller
@@ -187,4 +189,15 @@ public class StudyController {
 		redirectAttributes.addFlashAttribute("message", message);
 		return "redirect:/ItemIndex";
 	}
+	
+	@RequestMapping(value = "/Export", method = {RequestMethod.GET})
+	public String exportDenpyoPdf() throws JRException, IOException {
+		
+		studyService.exportDenpyoPdfs("2312170000");
+		
+		
+		
+		return "study/Study";
+	}
+	
 }

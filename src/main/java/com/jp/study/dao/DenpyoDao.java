@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.jp.study.dto.ExportDenpyoPdf;
 import com.jp.study.entity.DenpyoEntity;
 
 @Mapper
@@ -36,4 +37,6 @@ public interface DenpyoDao {
 
 	List<DenpyoEntity> selectAllDenpyoLust();
 
+	
+	List<ExportDenpyoPdf> exportDenpyo(String denpyoNo);
 }
