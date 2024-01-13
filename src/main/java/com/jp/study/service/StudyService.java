@@ -24,7 +24,6 @@ import com.jp.study.response.ResponseData;
 import com.jp.study.util.Constants;
 
 import lombok.RequiredArgsConstructor;
-import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -255,12 +254,12 @@ public class StudyService {
 		    directory.mkdirs();
 		}
 		
-		JRDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(printList);
+		JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(printList);
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("customerName", customerName);
 		parameterMap.put("goukeiKingaku", goukeiKingaku.toString());
 		
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperFilePath, parameterMap, jrBeanCollectionDataSource);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperFilePath, parameterMap, datasource);
 		JasperExportManager.exportReportToPdfFile(jasperPrint, exportBasePath + fileName);
 		
 	
